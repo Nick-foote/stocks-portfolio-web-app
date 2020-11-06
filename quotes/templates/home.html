@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+
+<h1>Welcome to the Home of Stocks</h1>
+<br><br>
+
+<form class="form-inline my-2 my-lg-0" action="{% url 'home' %}" method="POST">
+		{% csrf_token %}
+	<input class="form-control mr-sm-2" type="search" placeholder="Enter ticker symbol" aria-label="Search" name="ticker">
+	<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Look up stock</button>
+</form>
+<br>
+
+{% if ticker %}
+	{{ ticker }}
+{% endif %}
+
+
+{% if api %}
+	{% if api == 'ERROR' %}
+		Ticker Symbol Error. Please try again.
+
+	{% else %}
+
+		<h1>{{api.companyName}}</h1><br>
+		Ticker: {{ api.symbol }}<br>
+		Exchange: {{ api.primaryExchange }}<br><br>
+		Current Price: ${{ api.latestPrice }}<br>
+		52Wk High: ${{ api.week52High }}<br>
+		52Wk Low: ${{ api.week52Low }}<br>
+		Market Cap: ${{ api.marketCap | intword }}
+
+	{% endif %}
+{% endif %}
+
+
+
+
+{% endblock content %}
