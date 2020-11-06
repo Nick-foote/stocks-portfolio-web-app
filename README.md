@@ -1,5 +1,5 @@
 # stocks-portfolio-web-app
-A web app to track stock information and graph multiple share price history
+A web app to track stock ticker information and price. Then using Dash apps the information is graphed with multiple tickers in an interactive graphic. 
 
 
 
